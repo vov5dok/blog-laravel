@@ -49,7 +49,7 @@
     @yield('content')
 
     <footer class="main-footer">
-        <strong>Laravel blog</strong>  
+        <strong>Laravel blog</strong>
     </footer>
 
     <!-- Control Sidebar -->
