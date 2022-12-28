@@ -38,7 +38,7 @@
                                     value="{{ $tag->title }}"
                                 >
                                 @error('title')
-                                    <div class="text-danger">Это поле не может быть пустым</div>
+                                <div class="text-danger">Это поле не может быть пустым</div>
                                 @enderror
                             </div>
                             <input type="submit" class="btn btn-primary" value="Сохранить">
