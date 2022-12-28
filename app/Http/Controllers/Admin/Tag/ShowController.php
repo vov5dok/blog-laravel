@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Category;
+namespace App\Http\Controllers\Admin\Tag;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Tag;
 
-class CreateController extends Controller
+class ShowController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -13,8 +13,8 @@ class CreateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request)
+    public function __invoke(Tag $tag)
     {
-        return view('admin.category.create');
+        return view('admin.tag.show', compact('tag'));
     }
 }
