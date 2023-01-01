@@ -22,12 +22,22 @@ class StoreController extends Controller
             'content' => 'required|string',
             'preview_image' => 'required|file',
             'main_image' => 'required|file',
-            'category_id' => 'required|exists:categories,id',
+            'category_id' => 'required|integer|exists:categories,id',
+            'tag_ids' => 'nullable|array',
+            'tag_ids.*' => 'nullable|integer|exists:tags,id',
         ]);
 
-        $data['preview_image'] = Storage::put('/images', $data['preview_image']);
-        $data['main_image'] = Storage::put('/images', $data['main_image']);
-        Post::firstOrCreate($data);
+        try {
+            $tagIds = $data['tag_ids'];
+            unset($data['tag_ids']);
+
+            $data['preview_image'] = Storage::put('/images', $data['preview_image']);
+            $data['main_image'] = Storage::put('/images', $data['main_image']);
+            $post = Post::firstOrCreate($data);
+            $post->tags()->attach($tagIds);
+        } catch (\Exception $exception) {
+            abort(404);
+        }
 
         return redirect()->route('admin.post.index');
     }
