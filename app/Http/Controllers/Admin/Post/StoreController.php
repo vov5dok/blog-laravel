@@ -22,7 +22,9 @@ class StoreController extends Controller
             'content' => 'required|string',
             'preview_image' => 'required|file',
             'main_image' => 'required|file',
+            'category_id' => 'required|exists:categories,id',
         ]);
+
         $data['preview_image'] = Storage::put('/images', $data['preview_image']);
         $data['main_image'] = Storage::put('/images', $data['main_image']);
         Post::firstOrCreate($data);
