@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\Tag;
 
-class CreateController extends BaseController
+class CreateController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -15,8 +13,6 @@ class CreateController extends BaseController
      */
     public function __invoke()
     {
-        $categories = Category::all();
-        $tags = Tag::all();
-        return view('admin.user.create', compact('categories', 'tags'));
+        return view('admin.user.create');
     }
 }

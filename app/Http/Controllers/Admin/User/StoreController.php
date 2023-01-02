@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Admin\User;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\User\StoreRequest;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
-class StoreController extends BaseController
+class StoreController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -12,19 +15,12 @@ class StoreController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function __invoke(Request $request)
+    public function __invoke(StoreRequest $request)
     {
-        $data = $this->validate($request, [
-            'title' => 'required|string',
-            'content' => 'required|string',
-            'preview_image' => 'required|file',
-            'main_image' => 'required|file',
-            'category_id' => 'required|integer|exists:categories,id',
-            'tag_ids' => 'nullable|array',
-            'tag_ids.*' => 'nullable|integer|exists:tags,id',
-        ]);
+        $data = $request->validated();
+        $data['password'] = Hash::make($data['password']);
 
-        $this->service->store($data);
+        User::firstOrCreate(['email' => $data['email']], $data);
 
         return redirect()->route('admin.user.index');
     }

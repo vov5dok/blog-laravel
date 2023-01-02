@@ -36,8 +36,32 @@
                                     name="name"
                                     value="{{ old('name') }}"
                                 >
-                                @error('title')
-                                <div class="text-danger">Это поле не может быть пустым</div>
+                                @error('name')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group w-25">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Email"
+                                    name="email"
+                                    value="{{ old('email') }}"
+                                >
+                                @error('email')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group w-25">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Пароль"
+                                    name="password"
+                                    value="{{ old('password') }}"
+                                >
+                                @error('password')
+                                <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group">

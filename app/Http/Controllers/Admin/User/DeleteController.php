@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Post;
 use App\Models\User;
 
-class DeleteController extends BaseController
+class DeleteController extends Controller
 {
     /**
      * Handle the incoming request.

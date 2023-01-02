@@ -37,8 +37,20 @@
                                     name="name"
                                     value="{{ $user->name }}"
                                 >
-                                @error('title')
-                                <div class="text-danger">Это поле не может быть пустым</div>
+                                @error('name')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group w-25">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Email"
+                                    name="email"
+                                    value="{{ $user->email }}"
+                                >
+                                @error('email')
+                                <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group">

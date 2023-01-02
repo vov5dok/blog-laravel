@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin\User;
 
-use App\Http\Requests\Admin\Tag\UpdateRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\User\UpdateRequest;
 use App\Models\User;
 
-class UpdateController extends BaseController
+class UpdateController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -15,17 +16,8 @@ class UpdateController extends BaseController
      */
     public function __invoke(UpdateRequest $request, User $user)
     {
-        $data = $this->validate($request, [
-            'title' => 'required|string',
-            'content' => 'required|string',
-            'preview_image' => 'required|file',
-            'main_image' => 'required|file',
-            'category_id' => 'required|integer|exists:categories,id',
-            'tag_ids' => 'nullable|array',
-            'tag_ids.*' => 'nullable|integer|exists:tags,id',
-        ]);
-
-        $user = $this->service->update($data, $user);
+        $data = $request->validated();
+        $user->update($data);
 
         return view('admin.user.show', compact('user'));
     }
