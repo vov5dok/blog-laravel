@@ -55,4 +55,9 @@ class User extends Authenticatable
         ];
     }
 
+    public function isAdmin()
+    {
+        return auth()->user()->role == self::ROLE_ADMIN;
+    }
+
 }
